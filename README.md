@@ -101,5 +101,35 @@ AdmobInterstitialTest().showAdsTimeOut(
     }, lifecycle, [timeOutInMillis]
 )
 ```
+Ở màn splash nếu muốn hiện thanh progress loading
+```kotlin
+ val splashProgress = SplashProgress(context, layout_ads)
+ splashProgress.showProgress("#F8856A", "#F8856A", "#F8856A", "#A5A5A5")
+
+AdmobInterstitialTest().showAdsTimeOut(
+    activity,
+    [ID Quảng Cáo],
+    "", //Thêm text vào đây nếu muốn hiện dialog loading qc
+    object : AdmobInterstitialTest.AdHolderCallback {
+        override fun onAdShow(network: String, adtype: String) {
+            //code here
+            splashProgress.removeSplashProgress() //xóa thanh progress
+            
+        }
+
+        override fun onAdClose(adType: String) {
+
+        }
+
+        override fun onAdFailToLoad(messageError: String) {
+            //code here
+        }
+
+        override fun onAdOff() {
+
+        }
+    }, lifecycle, [timeOutInMillis]
+)
+```
 
 ### Open ad
